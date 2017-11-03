@@ -1,6 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import ListBooks from './ListBooks'
 
 class BooksApp extends React.Component {
   // Use the component's state to store the books data
@@ -23,12 +24,9 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {
-          this.state.books.map(book =>
-            <p key={book.id}> {book.title} </p>
-          )
-        }
-
+        // Use ListBooks component to list the books
+        // Pass books data as props
+        <ListBooks books={this.state.books}/>
       </div>
     )
   }
