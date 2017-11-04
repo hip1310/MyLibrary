@@ -3,45 +3,38 @@
  */
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import AddBookShelf from './AddBookShelf'
 
 class ListBooks extends Component{
   // Using prop-types to define required props and their types
   static propTypes = {
-  	books: PropTypes.array.isRequired
+    books : PropTypes.array.isRequired
   }
 
   render(){
+    const {books} = this.props
+    let currReadBooks, readBooks, wantReadBooks
+
+    // Filter the books according to their shelf name
+    currReadBooks = books.filter((book) => (book.shelf === "currentlyReading"));
+    readBooks = books.filter((book) => (book.shelf === "read"));
+    wantReadBooks = books.filter((book) => (book.shelf === "wantToRead"));
+
     return(
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <ol className="books-grid">
-            // Loop through all the books to list them
-            {this.props.books.map(book => 
-              // Defining unique key for each list item is advisable,
-              // as it helps React to know which list item got updated
-              // rather than reacreating whole list all the time.
-              <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    // Showing Book's thumbnail, title and all the authors
-                    <div className="book-cover" 
-                         style={{ width: 128, height: 193,
-                                  backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
-                    </div>
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">
-                    {book.authors.map((author, i) =>
-                      <p key={i}> {author} </p>
-                    )}
-                  </div>
-                </div>
-              </li>
-            )}
-          </ol>
+          {/* Add shelf by providing shelf name and books in that shelf
+              as props
+          */}
+          <AddBookShelf shelfName="Currently Reading"
+                           booksInShelf={currReadBooks}/>
+          <AddBookShelf shelfName="Want To Read"
+                           booksInShelf={wantReadBooks}/>
+          <AddBookShelf shelfName="Read"
+                           booksInShelf={readBooks}/>
         </div>
       </div>
     )

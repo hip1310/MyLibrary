@@ -24,8 +24,9 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        // Use ListBooks component to list the books
-        // Pass books data as props
+        {/* Use ListBooks component to list the books
+            Pass books data as props
+        */}
         <ListBooks books={this.state.books}/>
       </div>
     )
