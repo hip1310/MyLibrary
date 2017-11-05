@@ -6,7 +6,11 @@ import PropTypes from 'prop-types'
 
 class ListBooksContent extends Component{
   static propTypes = {
-    books : PropTypes.array.isRequired
+    books         : PropTypes.array.isRequired,
+    shelf         : PropTypes.string.isRequired,
+    shelfValues   : PropTypes.array.isRequired,
+    shelfNames    : PropTypes.array.isRequired,
+    onUpdateShelf : PropTypes.func.isRequired
   }
 
   render(){
@@ -25,6 +29,18 @@ class ListBooksContent extends Component{
                 <div className="book-cover" 
                      style={{ width: 128, height: 193,
                               backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+                </div>
+                <div className="book-shelf-changer">
+                  <select value={this.props.shelf}
+                          onChange={(e) => this.props.onUpdateShelf(book, e.target.value)}>
+                    <option value="none" disabled>Move to...</option>
+                    {this.props.shelfValues.map((shelf, i) =>
+                      <option key={i} value={shelf}>
+                        {this.props.shelfNames[i]}
+                      </option>
+                    )}
+                    <option value="none">None</option>
+                  </select>
                 </div>
               </div>
               <div className="book-title">{book.title}</div>

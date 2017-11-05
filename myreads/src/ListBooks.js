@@ -8,17 +8,20 @@ import AddBookShelf from './AddBookShelf'
 class ListBooks extends Component{
   // Using prop-types to define required props and their types
   static propTypes = {
-    books : PropTypes.array.isRequired
+    books         : PropTypes.array.isRequired,
+    onUpdateShelf : PropTypes.func.isRequired
   }
 
   render(){
     const {books} = this.props
-    let currReadBooks, readBooks, wantReadBooks
+    const shelfValues = ["currentlyReading", "wantToRead", "read"]
+    const shelfNames = ["Currently Reading", "Want To Read", "Read"]
 
     // Filter the books according to their shelf name
-    currReadBooks = books.filter((book) => (book.shelf === "currentlyReading"));
-    readBooks = books.filter((book) => (book.shelf === "read"));
-    wantReadBooks = books.filter((book) => (book.shelf === "wantToRead"));
+    const shelfBooks = []
+    shelfValues.map(shelfValue =>
+      shelfBooks.push(books.filter((book) => (book.shelf === shelfValue)))
+    )
 
     return(
       <div className="list-books">
@@ -29,12 +32,14 @@ class ListBooks extends Component{
           {/* Add shelf by providing shelf name and books in that shelf
               as props
           */}
-          <AddBookShelf shelfName="Currently Reading"
-                           booksInShelf={currReadBooks}/>
-          <AddBookShelf shelfName="Want To Read"
-                           booksInShelf={wantReadBooks}/>
-          <AddBookShelf shelfName="Read"
-                           booksInShelf={readBooks}/>
+          {shelfValues.map((shelfValue, i) =>
+            <AddBookShelf shelfValue={shelfValue}
+                          shelfName={shelfNames[i]}
+                          booksInShelf={shelfBooks[i]}
+                          shelfValues={shelfValues}
+                          shelfNames={shelfNames}
+                          onUpdateShelf={this.props.onUpdateShelf} />
+          )}
         </div>
       </div>
     )

@@ -21,13 +21,19 @@ class BooksApp extends React.Component {
     })
   }
 
+  updateBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then()
+    this.componentDidMount()
+  }
+
   render() {
     return (
       <div className="app">
         {/* Use ListBooks component to list the books
             Pass books data as props
         */}
-        <ListBooks books={this.state.books}/>
+        <ListBooks books={this.state.books}
+                   onUpdateShelf={this.updateBookShelf}/>
       </div>
     )
   }
