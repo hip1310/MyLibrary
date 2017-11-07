@@ -4,6 +4,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import AddBookShelf from './AddBookShelf'
+import {Link} from 'react-router-dom'
 
 class ListBooks extends Component{
   // Using prop-types to define required props and their types
@@ -33,13 +34,20 @@ class ListBooks extends Component{
               as props
           */}
           {shelfValues.map((shelfValue, i) =>
-            <AddBookShelf shelfValue={shelfValue}
+            <AddBookShelf key={i}
+                          shelfValue={shelfValue}
                           shelfName={shelfNames[i]}
                           booksInShelf={shelfBooks[i]}
                           shelfValues={shelfValues}
                           shelfNames={shelfNames}
                           onUpdateShelf={this.props.onUpdateShelf} />
           )}
+        </div>
+        <div className='open-search'>
+          {/* Link component of React Router talks to the BrowserRouter
+              component and tells it to update the url.
+          */}
+          <Link to='/search'>Add a book</Link>
         </div>
       </div>
     )

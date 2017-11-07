@@ -2,6 +2,8 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from './ListBooks'
+import AddBook from './AddBook'
+import {Route} from 'react-router-dom'
 
 class BooksApp extends React.Component {
   // Use the component's state to store the books data
@@ -29,11 +31,22 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+        {/* Route component of React Router renders particular UI
+            if the path matches to the URL
+        */}
         {/* Use ListBooks component to list the books
             Pass books data as props
         */}
-        <ListBooks books={this.state.books}
-                   onUpdateShelf={this.updateBookShelf}/>
+        <Route exact path="/" render={() => (
+          <ListBooks books={this.state.books}
+                     onUpdateShelf={this.updateBookShelf}/>
+        )}/>
+        {/* Use AddBook component to search and then add a book
+            to one of the shelves
+        */}
+        <Route path="/search" render={({history}) => (
+          <AddBook/>
+        )}/>
       </div>
     )
   }
