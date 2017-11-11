@@ -5,12 +5,12 @@ A web application to create our own library which helps to organize books in dif
 # Installation
 
 Download or clone the repository.
-Then navigate to /myreads directory and type npm install.
+Then navigate to `/myreads` directory and type `npm install`.
     => This will install all the dependencies needed to run the program.
 
 # To Run the app
 
-Navigate to /myreads directory type npm start.
+Navigate to `/myreads` directory type `npm start`.
     => This will have the app running on localhost:3000
 
 ## Important
