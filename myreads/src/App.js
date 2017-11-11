@@ -4,6 +4,10 @@ import './App.css'
 import ListBooks from './ListBooks'
 import AddBook from './AddBook'
 import {Route} from 'react-router-dom'
+// This is for using React Performance measurement tools
+// Use this code only when measuring performance
+//import Perf from 'react-addons-perf'
+//window.Perf=Perf
 
 class BooksApp extends React.Component {
   // Use the component's state to store the books data
@@ -29,6 +33,9 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const shelfValues = ["currentlyReading", "wantToRead", "read"]
+    const shelfNames = ["Currently Reading", "Want To Read", "Read"]
+
     return (
       <div className="app">
         {/* Route component of React Router renders particular UI
@@ -39,13 +46,18 @@ class BooksApp extends React.Component {
         */}
         <Route exact path="/" render={() => (
           <ListBooks books={this.state.books}
+                     shelfValues={shelfValues}
+                     shelfNames={shelfNames}
                      onUpdateShelf={this.updateBookShelf}/>
         )}/>
         {/* Use AddBook component to search and then add a book
             to one of the shelves
         */}
         <Route path="/search" render={({history}) => (
-          <AddBook/>
+          <AddBook shelfValues={shelfValues}
+                   shelfNames={shelfNames}
+                   onUpdateShelf={this.updateBookShelf}
+                   booksInShelf={this.state.books} />
         )}/>
       </div>
     )

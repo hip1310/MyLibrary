@@ -8,7 +8,6 @@ import ListBooksContent from './ListBooksContent'
 class AddBookShelf extends Component{
   static propTypes = {
     shelfName     : PropTypes.string.isRequired,
-    shelfValue    : PropTypes.string.isRequired,
     booksInShelf  : PropTypes.array.isRequired,
     shelfValues   : PropTypes.array.isRequired,
     shelfNames    : PropTypes.array.isRequired,
@@ -21,7 +20,6 @@ class AddBookShelf extends Component{
         <h2 className="bookshelf-title">{this.props.shelfName}</h2>
         <div className="bookshelf-books">
           <ListBooksContent books={this.props.booksInShelf}
-                            shelf={this.props.shelfValue}
                             shelfValues={this.props.shelfValues}
                             shelfNames={this.props.shelfNames}
                             onUpdateShelf={this.props.onUpdateShelf} />

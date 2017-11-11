@@ -15,12 +15,10 @@ class ListBooks extends Component{
 
   render(){
     const {books} = this.props
-    const shelfValues = ["currentlyReading", "wantToRead", "read"]
-    const shelfNames = ["Currently Reading", "Want To Read", "Read"]
 
     // Filter the books according to their shelf name
     const shelfBooks = []
-    shelfValues.map(shelfValue =>
+    this.props.shelfValues.map(shelfValue =>
       shelfBooks.push(books.filter((book) => (book.shelf === shelfValue)))
     )
 
@@ -33,13 +31,12 @@ class ListBooks extends Component{
           {/* Add shelf by providing shelf name and books in that shelf
               as props
           */}
-          {shelfValues.map((shelfValue, i) =>
+          {this.props.shelfNames.map((shelfName, i) =>
             <AddBookShelf key={i}
-                          shelfValue={shelfValue}
-                          shelfName={shelfNames[i]}
+                          shelfName={shelfName}
                           booksInShelf={shelfBooks[i]}
-                          shelfValues={shelfValues}
-                          shelfNames={shelfNames}
+                          shelfValues={this.props.shelfValues}
+                          shelfNames={this.props.shelfNames}
                           onUpdateShelf={this.props.onUpdateShelf} />
           )}
         </div>
