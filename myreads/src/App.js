@@ -22,14 +22,19 @@ class BooksApp extends React.Component {
    *  state.
    */
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })
+    this.getBooks()
   }
 
   updateBookShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then()
-    this.componentDidMount()
+    BooksAPI.update(book, shelf).then(() => {
+      this.getBooks()
+    })
+  }
+
+  getBooks(){
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
   }
 
   render() {
