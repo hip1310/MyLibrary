@@ -10,6 +10,8 @@ class ListBooks extends Component{
   // Using prop-types to define required props and their types
   static propTypes = {
     books         : PropTypes.array.isRequired,
+    shelfValues   : PropTypes.array.isRequired,
+    shelfNames   : PropTypes.array.isRequired,
     onUpdateShelf : PropTypes.func.isRequired
   }
 
