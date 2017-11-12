@@ -33,7 +33,8 @@ class ListBooksContent extends Component{
                 {/* Showing Book's thumbnail, title and all the authors */}
                 <div className="book-cover" 
                      style={{ width: 128, height: 193,
-                              backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+                              backgroundImage: (book && book.imageLinks) ? `url(${book.imageLinks.thumbnail})`
+                                               : `url(${'https://books.google.com/googlebooks/images/no_cover_thumb.gif'})`}}>
                 </div>
                 <div className="book-shelf-changer">
                   {/* We have to differentiate between /search and / pages.
